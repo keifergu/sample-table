@@ -8,6 +8,9 @@
       <fix-column
         label="年龄"
         prop="sex">
+        <template scope="scope">
+          {{scope}}
+        </template>
       </fix-column>
     </fix-table>
   </div>
@@ -19,9 +22,11 @@ import { fixTable, fixColumn } from './components/Table'
 export default {
   name: 'app',
   data () {
-    return { data: [
-    {name: 'Alex', sex: 'Male'},
-    {name: 'Nekox', sex: 'Female'}]
+    return {
+      data: [
+        {name: 'Alex', sex: 'Male'},
+        {name: 'Nekox', sex: 'Female'}
+      ]
     }
   },
   components: {
