@@ -1,11 +1,12 @@
 <template>
   <div>
-    <table @click="rootClickListener">
+    <table>
       <tr>
         <slot></slot>
       </tr>
       <!-- 根据源数据的长度，渲染列表的行 -->
-      <tr v-for="(row, index) in data" :key="index" :rowKey="index">
+      <tr v-for="(row, index) in data" :key="index"
+        @click="rowClick(row, index, $event)">
         <!-- 根据 columns 的配置项数，确定每行渲染的列 -->
         <row :data="row" :columns="columns" :index="index"/>
       </tr>
@@ -45,13 +46,8 @@ export default {
 
   },
   methods: {
-    rootClickListener (event) {
-      let { target } = event
-      const parentOf = ele => ele.parentElement
-      // TODO: 表头的点击处理
-      while (target.tagName !== 'TR') target = parentOf(target)
-      const rowKey = target.attributes.rowKey.value
-      this.$emit('click', this.data[rowKey], rowKey, event)
+    rowClick (row, index, event) {
+      this.$emit('click', row, index, event)
     }
   },
   mounted () {
@@ -62,9 +58,3 @@ export default {
   components: { Row }
 }
 </script>
-
-<style>
-table {
-
-}
-</style>
