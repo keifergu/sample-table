@@ -22,6 +22,14 @@
           <button @click="deleteData(scope.index)">Delete</button>
         </template>
       </fix-column>
+      <template slot="menu">
+        <ul class="menu" id="menu">
+          <li><a href="###">复制</a></li>
+          <li><a href="###">粘贴</a></li>
+          <li><a href="###">剪切</a></li>
+          <li><a href="###">刷新</a></li>
+        </ul>
+      </template>
     </fix-table>
   </div>
 </template>

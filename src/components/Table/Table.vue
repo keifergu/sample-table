@@ -6,11 +6,14 @@
       </tr>
       <!-- 根据源数据的长度，渲染列表的行 -->
       <tr v-for="(row, index) in data" :key="index"
-        @click="rowClick(row, index, $event)">
+        @click.right="rowClick(row, index, $event)" @click.left="log">
         <!-- 根据 columns 的配置项数，确定每行渲染的列 -->
         <row :data="row" :columns="columns" :index="index"/>
       </tr>
     </table>
+    <div v-show="visiable.menu">
+      <slot name="menu" ></slot>
+    </div>
   </div>
 </template>
 
@@ -39,15 +42,29 @@ export default {
   props: ['data'],
   data () {
     return {
-      columns: []
+      columns: [],
+      visiable: {
+        menu: false
+      }
+    }
+  },
+  created () {
+    if (this.contextMenu) {
+      window.oncontextmenu = () => false
     }
   },
   computed: {
-
+    contextMenu () {
+      return this.$slots.menu
+    }
   },
   methods: {
     rowClick (row, index, event) {
       this.$emit('click', row, index, event)
+    },
+    log (e) {
+      console.log('row')
+      console.log(e)
     }
   },
   mounted () {
