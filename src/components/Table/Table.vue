@@ -5,7 +5,8 @@
         <slot></slot>
       </tr>
       <!-- 根据源数据的长度，渲染列表的行 -->
-      <tr v-for="(row, index) in data" :key="index">
+      <tr v-for="(row, index) in data" :key="index"
+        @click="rowClick(row, index, $event)">
         <!-- 根据 columns 的配置项数，确定每行渲染的列 -->
         <row :data="row" :columns="columns" :index="index"/>
       </tr>
@@ -23,14 +24,14 @@ import Row from './Row'
  */
 function getColumnConfig (childNode) {
   const childConfigList = ['prop']
-  let config = {}
+  let columns = {}
   childConfigList.forEach(prop => {
-    config[prop] = childNode[prop]
+    columns[prop] = childNode[prop]
   })
   // TODO: undefined 时的数据处理
   // 获取组件里面的scoped模板渲染函数
-  config.template = childNode.$scopedSlots.default
-  return config
+  columns.template = childNode.$scopedSlots.default
+  return columns
 }
 
 export default {
@@ -44,6 +45,11 @@ export default {
   computed: {
 
   },
+  methods: {
+    rowClick (row, index, event) {
+      this.$emit('click', row, index, event)
+    }
+  },
   mounted () {
     // 挂载时才可以通过 $children 获取子组件，然后获取配置信息
     // 此处可能会存在子组件没有渲染完的问题，可以换成 nextTick
@@ -52,9 +58,3 @@ export default {
   components: { Row }
 }
 </script>
-
-<style scoped>
-table {
-
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <fix-table :data="data">
+    <fix-table :data="data" @click="rowClick">
       <fix-column
         label="姓名"
         prop="name">
@@ -64,6 +64,9 @@ export default {
   methods: {
     deleteData (key) {
       this.data.splice(key, 1)
+    },
+    rowClick (recorder, index, event) {
+      console.log(arguments)
     }
   },
   components: {
