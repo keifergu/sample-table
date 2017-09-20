@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     rowClick (row, index, event) {
-      this.$emit('click', row, index, event)
+      this.$emit('rowClick', row, index, event)
     }
   },
   mounted () {
