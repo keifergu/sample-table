@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <fix-table :data="data" @click="rowClick">
+    <fix-table :data="data" @rowClick="rowClick">
       <fix-column
         label="姓名"
         prop="name">
