@@ -6,7 +6,7 @@
       </tr>
       <!-- 根据源数据的长度，渲染列表的行 -->
       <tr v-for="(row, index) in data" :key="index"
-        @click="rowClick(row, index, $event)">
+        @click.stop="rowClick(row, index, $event)">
         <!-- 根据 columns 的配置项数，确定每行渲染的列 -->
         <row :data="row" :columns="columns" :index="index"/>
       </tr>
@@ -24,7 +24,11 @@ import Row from './Row'
  */
 function getColumnConfig (childNode) {
   const childConfigList = ['prop']
+  const childAttrList = ['type']
   let columns = {}
+  childAttrList.forEach(prop => {
+    columns[prop] = childNode.$attrs[prop]
+  })
   childConfigList.forEach(prop => {
     columns[prop] = childNode[prop]
   })

@@ -1,10 +1,13 @@
 <template>
   <div id="app">
-    <fix-table :data="data" @click="rowClick">
+    <fix-table :data="data" @click="rowClick" @rowSelect="rowSelect">
+      <fix-column
+        type="selection"
+      />
       <fix-column
         label="姓名"
-        prop="name">
-      </fix-column>
+        prop="name"
+      />
       <fix-column
         label="年龄"
         prop="age">
@@ -14,8 +17,8 @@
       </fix-column>
       <fix-column
         label="Address"
-        prop="address">
-      </fix-column>
+        prop="address"
+      />
       <fix-column
         label="Option">
         <template scope="scope">
@@ -61,11 +64,17 @@ export default {
       }]
     }
   },
+  created () {
+    console.log(this)
+  },
   methods: {
     deleteData (key) {
       this.data.splice(key, 1)
     },
     rowClick (recorder, index, event) {
+      console.log(arguments)
+    },
+    rowSelect (recorders, selectIndex) {
       console.log(arguments)
     }
   },
