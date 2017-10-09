@@ -1,7 +1,6 @@
 <template>
   <div>
     <table>
-      <context-menu :visible.sync="store.state.menu.visible"/>
       <tr>
         <slot></slot>
       </tr>
@@ -68,6 +67,7 @@ export default {
     // 挂载时才可以通过 $children 获取子组件，然后获取配置信息
     // 此处可能会存在子组件没有渲染完的问题，可以换成 nextTick
     const columns = this.$children.map(getColumnConfig)
+    console.log(this)
     this.store.commit('updateColumns', {
       columns
     })

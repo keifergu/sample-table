@@ -1,4 +1,4 @@
-import fixColumn from './Column'
+import fixColumn from './Column.js'
 import fixTable from './Table'
 
 export {
